@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:/data/studyroom/database.db
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      pool-name: StudyRoomHikariPool-Prod
+      connection-test-query: SELECT 1
+      connection-init-sql: PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+knife4j:
+  enable: false
+
+logging:
+  level:
+    com.studyroom: INFO
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+
+server:
+  port: 8080

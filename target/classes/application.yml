@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: studyroom
+  profiles:
+    active: dev
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+
+jwt:
+  secret: ${JWT_SECRET:your-256-bit-secret-key-for-jwt-signing}
+  expiration: 604800000
+  header: Authorization
+  prefix: Bearer
+
+business:
+  reservation:
+    max-daily-times: 3
+    advance-minutes: 30
+    max-duration-hours: 4
+    cancel-before-minutes: 15
+    checkin-late-minutes: 15
+    checkin-early-minutes: 30
+  blacklist:
+    default-days: 7
+    trigger-count: 3
+
+logging:
+  level:
+    com.studyroom: DEBUG
+    org.springframework: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

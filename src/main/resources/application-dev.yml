@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:./database.db
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      pool-name: StudyRoomHikariPool
+      connection-test-query: SELECT 1
+      connection-init-sql: PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+knife4j:
+  enable: true
+  openapi:
+    title: 自习室预约系统API文档
+    description: 基于Spring Boot + SQLite的自习室预约系统
+    version: 1.0.0
+    concat: 开发团队
+    email: dev@studyroom.com
+
+ai:
+  enabled: true
+  mock-mode: true
+  provider: deepseek
+  api-key: ${AI_API_KEY:your-api-key}
+  api-url: https://api.deepseek.com/v1/chat/completions
+  model: deepseek-chat
+  timeout: 30000
+
+logging:
+  level:
+    com.studyroom: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
